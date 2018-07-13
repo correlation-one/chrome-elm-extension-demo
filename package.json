@@ -9,7 +9,7 @@
     "url": "https://github.com/jouderianjr/git-bitcoin-br-chrome-extension"
   },
   "scripts": {
-    "start": "webpack-dev-server --hot --inline",
+    "start": "open http://localhost:8080 && webpack-dev-server --hot --inline --host=0.0.0.0 ",
     "prebuild": "rimraf dist",
     "build": "webpack",
     "reinstall": "npm i rimraf && rimraf node_modules && npm uninstall -g elm && npm i -g elm && npm i && elm package install"
