@@ -1,27 +1,24 @@
 # Bitcoin BR Chrome Extension
 
-<img height="600" src="imgs/screenshot.png">
-
-Hey, I built this extension using Elm (:heart:) and fetching data from (BitValor)[https://bitvalor.com/api]
-
-[Click here to use it!](https://chrome.google.com/webstore/detail/bitcoin-br/keoihaeoogphapkdoijfnfboggimfdkj?hl=pt-BR)
+This repo was based on the structure of the code for a [bitcoin price checking extension][base-extension]
+by [jouderianjr][source-repo].
 
 ### Running Locally:
 
 Clone this repo.
 
 ```
-git clone https://github.com/jouderianjr/bitcoin-br-chrome-extension
+git clone https://github.com/correlation-one/???  # todo: fix this
 ```
 
 Install all dependencies:
 ```
-npm install
+yarn install
 ```
 
 ### Serve locally:
 ```
-npm start
+yarn start
 ```
 * Access app at `http://localhost:8080/`
 * Get coding! The entry point file is `src/elm/Main.elm`
@@ -30,8 +27,17 @@ npm start
 
 ### Build & bundle for prod:
 ```
-npm run build
+yarn build
 ```
 
 * Files are saved into the `/dist` folder
 * To check it, open `dist/index.html`
+
+### Run Tests
+
+```
+elm test
+```
+
+[source-repo]: https://github.com/jouderianjr/bitcoin-br-chrome-extension
+[base-extension]: https://chrome.google.com/webstore/detail/bitcoin-br/keoihaeoogphapkdoijfnfboggimfdkj?hl=pt-BR
