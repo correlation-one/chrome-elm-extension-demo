@@ -1,6 +1,7 @@
 module Render.Main exposing (..)
 
-import Time exposing (Time)
+--import Time exposing (Time)
+
 import Math.Matrix4 as Mat4 exposing (Mat4)
 import Math.Vector3 as Vec3 exposing (Vec3, vec3)
 import WebGL exposing (Mesh, Shader)
@@ -15,36 +16,28 @@ type alias Uniforms =
 type alias Vertex =
     { position : Vec3
     , color : Vec3
+    , pointSize : Float
     }
 
 
 {-| XY coordinates ranging from -1 to 1
 -}
 type alias Drawable =
-    { x : Float, y : Float }
+    { x : Float, y : Float, pointSize : Float }
 
 
-toVertex : { x : Float, y : Float } -> Vertex
-toVertex { x, y } =
-    Vertex (vec3 x y 0) (vec3 0 0 0)
+toVertex : Drawable -> Vertex
+toVertex { x, y, pointSize } =
+    Vertex (vec3 x y 0) (vec3 0 0 0) pointSize
 
 
 triMesh : Mesh Vertex
 triMesh =
     WebGL.triangles
-        [ ( Vertex (vec3 0 0 0) (vec3 1 0 0)
-          , Vertex (vec3 1 1 0) (vec3 0 1 0)
-          , Vertex (vec3 1 -1 0) (vec3 0 0 1)
+        [ ( Vertex (vec3 0 0 0) (vec3 1 0 0) 10
+          , Vertex (vec3 1 1 0) (vec3 0 1 0) 10
+          , Vertex (vec3 1 -1 0) (vec3 0 0 1) 10
           )
-        ]
-
-
-oldMesh : Mesh Vertex
-oldMesh =
-    WebGL.points
-        [ Vertex (vec3 0 0 0) (vec3 1 0 0)
-        , Vertex (vec3 1 1 0) (vec3 0 1 0)
-        , Vertex (vec3 1 -1 0) (vec3 0 0 1)
         ]
 
 
@@ -61,6 +54,7 @@ vertexShader =
 
         attribute vec3 position;
         attribute vec3 color;
+        attribute float pointSize;
 
         uniform mat4 perspective;
         varying vec3 vcolor;
@@ -68,7 +62,7 @@ vertexShader =
         void main () {
             vcolor = color;
             gl_Position = perspective * vec4(position, 1.0);
-            gl_PointSize = 10.0;
+            gl_PointSize = pointSize;
         }
 
     |]

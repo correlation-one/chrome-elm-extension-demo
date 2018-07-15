@@ -9,7 +9,7 @@ type alias SolarBody =
     , velocityX : Float
     , velocityY : Float
     , mass : Float
-    , name : String
+    , id : String
     }
 
 
@@ -25,6 +25,16 @@ type alias Force =
     { fx : Float
     , fy : Float
     }
+
+
+
+--type SolarBodyType
+--= Sun
+--| Mercury
+--| Venus
+--| Earth
+--| Mars
+--| Other
 
 
 updatePlanets : Time -> List SolarBody -> List SolarBody
@@ -119,7 +129,7 @@ nonPlanet =
     , velocityX = 0
     , velocityY = 0
     , mass = 0
-    , name = "nonPlanet"
+    , id = "other"
     }
 
 
